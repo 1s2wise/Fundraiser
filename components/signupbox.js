@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { signup } from '../services/api';
+import { signupAPI } from '../services/api';
 
 
 export default class extends Component {
@@ -17,14 +17,29 @@ export default class extends Component {
         this.state = {
             email: '',
             password: '',
-            cfpassword: '',
-            ftype: '',
+            confirm_password: '',
+            fundraiser_type: '',
             phone: '',
-            orgname: ''
+            organization_name: ''
         };
 
-        var payload = this.state.email;
+        this.signUp = this.signUp.bind(this);
+
+
     }
+
+    signUp() {
+        signupAPI(JSON.stringify(this.state))
+
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        alert('ollo');
+    }
+
 
 
     handleEmailChange(e) {
@@ -34,11 +49,11 @@ export default class extends Component {
         this.setState({ password: e.target.value })
     }
     handleCfPasswordChange(e) {
-        this.setState({ cfpassword: e.target.value })
+        this.setState({ confirm_password: e.target.value })
     }
 
     handleFtypeChange(e) {
-        this.setState({ ftype: e.target.value })
+        this.setState({ fundraiser_type: e.target.value })
     }
 
     handlePhoneChange(e) {
@@ -46,24 +61,28 @@ export default class extends Component {
     }
 
     handleOrgnameChange(e) {
-        this.setState({ orgname: e.target.value })
+        this.setState({ organization_name: e.target.value })
+
     }
 
-    signIn(event) {
-        alert('Email address is ' + payload);
-    }
+
 
     render() {
         return (
             <div className="container">
                 <div className="col-md-4">
-                    <label for="inputEmail" className="sr-only">Email address</label>
-                    <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" />
-                    <label for="inputPassword" className="sr-only">Password</label>
-                    <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password"/>
-
-                    <button className="btn btn-primary" onClick={this.signIn} >Sign up</button>
+                    <form className="form-group">
+                        <input className="form-control" id="ip_email" onChange={this.handleEmailChange} placeholder="Email" />
+                        <input className="form-control" id="ip_password" onChange={this.handlePasswordChange} placeholder="Password" />
+                        <input className="form-control" id="ip_cfPassword" onChange={this.handleCfPasswordChange} placeholder="Confirm Password"
+                        />
+                        <input className="form-control" id="ip_ftype" onChange={this.handleFtypeChange} placeholder="Fundraiser Type" />
+                        <input className="form-control" id="ip_phone" onChange={this.handlePhoneChange} placeholder="Phone" />
+                        <input className="form-control" id="ip_orgName" onChange={this.handleOrgnameChange} placeholder="Organization Name" />
+                        <button className="btn btn-primary" onClick={this.signUp} >Sign up</button>
+                    </form>
                 </div>
+
             </div>
         )
     }

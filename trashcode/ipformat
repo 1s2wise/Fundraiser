@@ -1,0 +1,12 @@
+http://52.41.54.41:3001/fundraisers/	"{
+    ""email"": ""this230@egmail.com"",
+    ""password"": ""124155"",
+    ""confirm_password"": ""1254155"",
+    ""fundraiser_type"": ""O"",
+    ""phone"": 9048572278,
+    ""organization_name"": ""O""
+}"
+http://52.41.54.41:3001/fundraisers/login	"{
+    ""email"": ""binil.baby@experionglobal.com"",
+    ""password"": ""123456""
+}"
