@@ -14,7 +14,8 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem
+} from 'reactstrap';
 
 export default class TopNav extends React.Component {
   constructor(props) {
@@ -25,11 +26,13 @@ export default class TopNav extends React.Component {
       isOpen: false
     };
   }
+  //CSS ONLY
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+  //CSS ONLY
   render() {
     return (
       <div>
