@@ -10,6 +10,7 @@ export function signupAPI(body)
 
 export function loginAPI(body)
 {
-    var url = 'login';
+    var url = 'fundraisers/login';
+    console.log('enyx');
     return axios.post(BASE_URL+url,body);
 }

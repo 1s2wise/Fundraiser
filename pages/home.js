@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import TopNav from '../components/navigation';
-import SignupBox from '../components/signupbox';
-import LoginBox from '../components/loginbox';
+
 
 export default class Home extends Component {
     render() {
@@ -10,19 +9,9 @@ export default class Home extends Component {
             <div>
                 <TopNav />
                 <div className="content">
-                <Switch>
-						<Route
-							exact
-							path="/login"
-							component={ LoginBox }
-						/>
-						<Route
-							path="/signup"
-							component={ SignupBox }
-						/>
-                    </Switch>
+                <h2>Fix</h2>
 
-					</div>
+                </div>
             </div>
         )
     }

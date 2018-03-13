@@ -1,6 +1,5 @@
-import React from 'react';
-import SignupBox from '../components/signupbox';
-// import LoginBox from '../components/loginbox';
+import React, { Component } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import {
@@ -17,7 +16,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 
-export default class TopNav extends React.Component {
+export default class TopNav extends Component {
   constructor(props) {
     super(props);
 
@@ -36,14 +35,14 @@ export default class TopNav extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="fade" light expand="md">
+        <Navbar color="dark" light expand="md">
           <NavbarBrand href="/">reactstrap</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              {/* <NavItem>
+              <NavItem>
                <Link to="/login">Log In</Link>
-              </NavItem> */}
+              </NavItem>
               <NavItem>
                 <Link to="/signup">Sign Up</Link>
               </NavItem>

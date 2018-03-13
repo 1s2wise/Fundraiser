@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-//import SignupBox from '../components/signupbox';
-import Example from '../components/navigation';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import { loginAPI } from '../services/api';
+const style = {
+    margin: 12,
+  };
 
 export default class LoginBox extends Component {
     constructor(props) {
@@ -19,7 +23,7 @@ export default class LoginBox extends Component {
     }
 
     logIn() {
-        logInAPI(this.state)
+        loginAPI(this.state)
 
             .then(function (response) {
                 console.log(response);
