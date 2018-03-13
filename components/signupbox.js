@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
+import { render } from 'react-dom';
 import { signupAPI } from '../services/api';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+const style = {
+    margin: 12,
+  };
+
 
 
 export default class extends Component {
@@ -29,7 +36,7 @@ export default class extends Component {
     }
 
     signUp() {
-        signupAPI(JSON.stringify(this.state))
+        signupAPI(this.state)
 
             .then(function (response) {
                 console.log(response);
@@ -72,14 +79,19 @@ export default class extends Component {
             <div className="container">
                 <div className="col-md-4">
                     <form className="form-group">
-                        <input className="form-control" id="ip_email" onChange={this.handleEmailChange} placeholder="Email" />
-                        <input className="form-control" id="ip_password" onChange={this.handlePasswordChange} placeholder="Password" />
-                        <input className="form-control" id="ip_cfPassword" onChange={this.handleCfPasswordChange} placeholder="Confirm Password"
-                        />
-                        <input className="form-control" id="ip_ftype" onChange={this.handleFtypeChange} placeholder="Fundraiser Type" />
-                        <input className="form-control" id="ip_phone" onChange={this.handlePhoneChange} placeholder="Phone" />
-                        <input className="form-control" id="ip_orgName" onChange={this.handleOrgnameChange} placeholder="Organization Name" />
-                        <button className="btn btn-primary" onClick={this.signUp} >Sign up</button>
+
+    <TextField
+      hintText="Hint Text"
+      floatingLabelText="Floating Label Text"
+    />
+
+                        <TextField  id="ip_email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID" />
+                        <TextField  id="ip_password" onChange={this.handlePasswordChange} hintText="Atleast 8 Characters" floatingLabelText="Enter Password" />
+                        <TextField  id="ip_cfPassword" onChange={this.handleCfPasswordChange} hintText="Confirm Password" floatingLabelText="Re-Type Password" />
+                        <TextField  id="ip_ftype" onChange={this.handleFtypeChange} hintText="Fundraiser Type" floatingLabelText="Fundraiser Type" />
+                        <TextField  id="ip_phone" onChange={this.handlePhoneChange} hintText="+xx xxx xxx xxxx" floatingLabelText="Phone" />
+                        <TextField  id="ip_orgName" onChange={this.handleOrgnameChange} hintText="Organization Name" floatingLabelText="Enter Organization Name" />
+                        <RaisedButton label="Sign up" type="button" primary={true} style={style} onClick={this.signUp}/>
                     </form>
                 </div>
 
