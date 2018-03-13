@@ -1,4 +1,8 @@
 import React from 'react';
+import SignupBox from '../components/signupbox';
+// import LoginBox from '../components/loginbox';
+import { Link } from 'react-router-dom';
+
 import {
   Collapse,
   Navbar,
@@ -12,7 +16,7 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 
-export default class Example extends React.Component {
+export default class TopNav extends React.Component {
   constructor(props) {
     super(props);
 
@@ -29,16 +33,16 @@ export default class Example extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="faded" light expand="md">
+        <Navbar color="fade" light expand="md">
           <NavbarBrand href="/">reactstrap</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              {/* <NavItem>
+               <Link to="/login">Log In</Link>
+              </NavItem> */}
               <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">Github</NavLink>
+                <Link to="/signup">Sign Up</Link>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>

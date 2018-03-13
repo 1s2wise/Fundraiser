@@ -9,14 +9,14 @@ export default class App extends Component {
         return (
             <MuiThemeProvider>
             <BrowserRouter>
-                <div>
+                
                     <Route
                         exact
                         path="/"
                         component =  { Home }
                     />
 
-                </div>
+                
             </BrowserRouter>
             </MuiThemeProvider>
 

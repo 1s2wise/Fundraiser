@@ -7,3 +7,9 @@ export function signupAPI(body)
     var url = 'fundraisers/';
     return axios.post(BASE_URL+url,body);
 }
+
+export function loginAPI(body)
+{
+    var url = 'login';
+    return axios.post(BASE_URL+url,body);
+}
