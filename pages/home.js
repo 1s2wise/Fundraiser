@@ -11,7 +11,6 @@ export default class Home extends Component {
                 <TopNav />
                 <div className="content">
                 <Switch>
-
 						<Route
 							exact
 							path="/login"
