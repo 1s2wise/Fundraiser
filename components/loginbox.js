@@ -3,11 +3,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { loginAPI } from '../services/api';
 import { withRouter } from 'react-router-dom'
-const style = {
-    margin: 12,
-  };
 
-  class LoginBox extends Component {
+class LoginBox extends Component {
     constructor(props) {
         super(props);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -27,14 +24,13 @@ const style = {
         loginAPI(this.state)
 
             .then((response) => {
-                if(response.status == 200)
-                {
+                if (response.status == 200) {
                     console.log(this);
                     this.props.history.push({
                         pathname: '/userHome',
-                        state: {userData:response.data}
+                        state: { userData: response.data }
                     })
-                    
+
                 }
             })
             .catch(function (error) {
@@ -55,18 +51,21 @@ const style = {
 
     render() {
         return (
-            <div className="content">
-                <div className="col-md-4">
-                    <form className="form-group">
-                        <TextField  id="ip_email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID" />
-                        <TextField  id="ip_password" onChange={this.handlePasswordChange} hintText="Atleast 8 Characters" floatingLabelText="Enter Password" />
-                        <RaisedButton label="Log In" type="button" primary={true} style={style} onClick={this.logIn}/>
-                    </form>
-                </div>
+            <div className="login-container raiseup">
+                <h3>Welcome Back!</h3>
+                <h6>We're glad you're here</h6>
+                <form className="form-group">
+                    <TextField id="ip_email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID" />
+                    <TextField id="ip_password" onChange={this.handlePasswordChange} hintText="Atleast 8 Characters" floatingLabelText="Enter Password" />
+                    <div className="loginbtn">
+                        <RaisedButton label="Log In" type="button" primary={true} onClick={this.logIn} />
+                    </div>
+                </form>
 
             </div>
+
         )
     }
 }
 
-export default withRouter (LoginBox);
+export default withRouter(LoginBox);

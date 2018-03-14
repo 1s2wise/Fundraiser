@@ -1,3 +1,25 @@
+PUT
+http://52.41.54.41:3001/fundraisers/:id	"{
+    ""first_name"": ""Megha"",
+    ""last_name"": ""S"",
+    ""email"": ""megha.s@experionglobal.com"",
+    ""street"": null,
+    ""city"": null,
+    ""state"": null,
+    ""country_code"": null,
+    ""zip"": null,
+    ""phone"": ""1234567890"",
+    ""profile_image_url"": null,
+    ""fundraiser_type"": ""O"",
+    ""dob"": null,
+    ""facebook_link"": ""facebook.com"",
+    ""twitter_link"": null,
+    ""google_link"": null,
+    ""organization_name"": null,
+    ""fundraiser_logo_url"": null
+}"
+______________________________________________________________
+
 http://52.41.54.41:3001/fundraisers/	"{
     ""email"": ""this230@egmail.com"",
     ""password"": ""124155"",

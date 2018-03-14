@@ -1,9 +1,75 @@
-.navcolor{
-    background-color: cadetblue;
+
+.nav-color{
+    background-color: rgb(62, 129, 109) !important;
 }
-.content{
-    background: #16222A;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #3A6073, #16222A);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #3A6073, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            
+
+.nav-link {
+    padding-right: .5rem !important;
+    padding-left: .5rem !important;
+    color: #fff;
+  }
+
+.navbar-dark .navbar-brand{
+    color: #ff9939;
+    font-size: 1.6em !important;
+    font-family: 'Bitter';
+}
+
+a:hover{
+    color: #fff !important;
+}
+.contents{
+    margin-top: 50px;
+}
+#disp-signup{
+    
+    
+}
+
+#disp-logout{
+    display: none;
+}
+
+
+.login-container{
+    margin-left: 6%;
+
+}
+
+h6{
+    padding-left: 10px;
+}
+.loginbtn{
+margin-top: 15px !important;
+}
+
+#logo{
+    height:40px;
+    width: 54px;
+}
+
+.img-container{
+    max-height: 100%;
+    max-width: 95%;
+
+}
+
+.signup-container{
+}
+
+.raiseup {
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  }
+
+.raiseup h3, .raiseup h6{
+    padding-left: 15px;
+    padding-top: 20px;
+    font-weight: bold;
+    color: #214478;
+    font-family: 'Merienda';
+}
+
+.form-group{
+    padding-left: 15px;
+    padding-bottom: 32px;
 }

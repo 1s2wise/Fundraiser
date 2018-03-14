@@ -2,56 +2,41 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
-
 export default class TopNav extends Component {
-  constructor(props) {
-    super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
-    };
-  }
-  //CSS ONLY
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
   //CSS ONLY
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-md bg-dark content">
-          <a className="navbar-brand" href="#">Navbar</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span className="navbar-toggler-icon"></span>
+        <nav class="navbar navbar-expand-md navbar-dark nav-color">
+
+          <a class="navbar-brand" href="#">
+          <img id="logo" src="img/fund.png"/>
+          <strong>Fundox</strong></a>
+
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link" href="login">Link</a>
+
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Link</a>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Link</a>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
               </li>
             </ul>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item" id="disp-login"><a href="/login" class="nav-link" ><i class="fas fa-sign-in-alt"></i> Login</a></li>
+              <li class="nav-item" id="disp-signup"><a href="/signup" class="nav-link" ><i class="fas fa-user-plus"></i> Sign Up</a></li>
+              <li class="nav-item" id="disp-logout"><a href="#" class="nav-link" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+
+            </ul>
+
           </div>
         </nav>
       </div>
