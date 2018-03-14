@@ -79,12 +79,6 @@ export default class SignupBox extends Component {
             <div className="container">
                 <div className="col-md-4">
                     <form className="form-group">
-
-    <TextField
-      hintText="Hint Text"
-      floatingLabelText="Floating Label Text"
-    />
-
                         <TextField  id="ip_email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID" />
                         <TextField  id="ip_password" onChange={this.handlePasswordChange} hintText="Atleast 8 Characters" floatingLabelText="Enter Password" />
                         <TextField  id="ip_cfPassword" onChange={this.handleCfPasswordChange} hintText="Confirm Password" floatingLabelText="Re-Type Password" />

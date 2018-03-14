@@ -2,9 +2,11 @@ var config = {
 	entry: './main.js', // entry point
 	output: {
 		  filename: 'bundle.js', // place where bundled app will be served
+		  publicPath: '/'
 	   },
 	devServer: {
 		  inline: true, // autorefresh
+		  historyApiFallback: true,
 		  port: 8080 // development port server
 	   },
 	module: {

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { loginAPI } from '../services/api';
+import { withRouter } from 'react-router-dom'
 const style = {
     margin: 12,
   };
 
-export default class LoginBox extends Component {
+  class LoginBox extends Component {
     constructor(props) {
         super(props);
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -25,13 +26,20 @@ export default class LoginBox extends Component {
     logIn() {
         loginAPI(this.state)
 
-            .then(function (response) {
-                console.log(response);
+            .then((response) => {
+                if(response.status == 200)
+                {
+                    console.log(this);
+                    this.props.history.push({
+                        pathname: '/userHome',
+                        state: {userData:response.data}
+                    })
+                    
+                }
             })
             .catch(function (error) {
                 console.log(error);
             });
-        alert('ollo');
     }
 
 
@@ -47,7 +55,7 @@ export default class LoginBox extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="content">
                 <div className="col-md-4">
                     <form className="form-group">
                         <TextField  id="ip_email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID" />
@@ -60,3 +68,5 @@ export default class LoginBox extends Component {
         )
     }
 }
+
+export default withRouter (LoginBox);
