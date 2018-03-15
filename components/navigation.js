@@ -3,6 +3,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class TopNav extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+    userEmail: '',
+    };
+    console.log('nav',props);
+  }
   //CSS ONLY
   render() {
     return (
@@ -33,7 +40,11 @@ export default class TopNav extends Component {
             <ul class="navbar-nav ml-auto">
               <li class="nav-item" id="disp-login"><a href="/login" class="nav-link" ><i class="fas fa-sign-in-alt"></i> Login</a></li>
               <li class="nav-item" id="disp-signup"><a href="/signup" class="nav-link" ><i class="fas fa-user-plus"></i> Sign Up</a></li>
+              <li class="nav-item" ><a href="#" class="nav-link" >{this.props.showEmail}</a></li>
               <li class="nav-item" id="disp-logout"><a href="#" class="nav-link" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+              
+              
+
 
             </ul>
 

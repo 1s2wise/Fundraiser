@@ -24,11 +24,12 @@ class LoginBox extends Component {
         loginAPI(this.state)
 
             .then((response) => {
+
                 if (response.status == 200) {
-                    console.log(this);
+                    console.log('200ok', response);
                     this.props.history.push({
                         pathname: '/userHome',
-                        state: { userData: response.data }
+                        state: { userData: response.data, authKey: response.headers.auth }
                     })
 
                 }

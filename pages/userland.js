@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import TopNav from '../components/navigation'
+import EditableUserProfile from '../components/addProfile';
 
 class LandingPage extends Component {
+    constructor(props) {
+        super();
+        this.state = {
+            showEmail : '',
+        }
+        console.log('land',props);
+    }
     componentDidMount () {
         const scriptHide = document.createElement("script");
   
@@ -11,19 +19,13 @@ class LandingPage extends Component {
         scriptHide.appendChild(scriptText);
         document.body.appendChild(scriptHide);
 
-        {
-            console.log(document);
-        }
+        
     }
     render() {
         return (
             <div>
-                <TopNav />
-                <h3>
-                    {
-                        this.props.location.state.userData.user_data.email
-                    }
-                </h3>
+                <TopNav showEmail = {this.props.location.state.userData.user_data.email}/>
+                <EditableUserProfile currentUser = {this.props.location.state.userData} />
 
             </div>
         )
