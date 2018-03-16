@@ -27,6 +27,11 @@ class LoginBox extends Component {
 
                 if (response.status == 200) {
                     console.log('200ok', response);
+                    window.sessionStorage.setItem("AuthKey", response.headers.auth);
+                    window.sessionStorage.setItem("UID", response.data.user_data.id);
+                    
+
+
                     this.props.history.push({
                         pathname: '/userHome',
                         state: { userData: response.data, authKey: response.headers.auth }

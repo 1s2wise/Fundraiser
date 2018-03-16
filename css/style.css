@@ -26,6 +26,10 @@ a:hover{
     
 }
 
+.fa-upload{
+    padding-left: 6px;
+}
+
 #disp-logout{
     display: none;
 }

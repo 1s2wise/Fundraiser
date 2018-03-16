@@ -3,12 +3,17 @@ import axios from 'axios';
 const BASE_URL = 'http://52.41.54.41:3001/';
 
 
-
-
-
-
-
-
+axios.interceptors.request.use((config) => {
+    const authKey = window.sessionStorage.getItem("AuthKey");
+    console.log('auth', authKey);
+	if( authKey ) {
+		config.headers['Auth'] = authKey;
+		return config;
+	}
+	else {
+		return config;
+	}
+});
 
 export function signupAPI(body)
 {
@@ -23,16 +28,10 @@ export function loginAPI(body)
     return axios.post(BASE_URL+url,body);
 }
 
-export function userUpdateAPI(body,uid,authKey)
+export function userUpdateAPI(body,uid)
 {
-    var url = 'fundraisers/' +uid;
-    console.log('enyx');
+    var url = 'fundraisers/'+uid;
+    console.log('userupdateapi');
 
-    var headers = {
-        'Content-Type': 'application/json',
-        'Auth': 'JWT fefege...' 
-    }
-    axios.post(Helper.getUserAPI(), data, headers)
-
-    return axios.post(BASE_URL+url,body);
+    return axios.put(BASE_URL+url,body);
 }

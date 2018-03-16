@@ -9,6 +9,7 @@ class LandingPage extends Component {
         this.state = {
             showEmail : '',
         }
+
         console.log('land',props);
     }
     componentDidMount () {
@@ -18,8 +19,7 @@ class LandingPage extends Component {
   
         scriptHide.appendChild(scriptText);
         document.body.appendChild(scriptHide);
-
-        
+       
     }
     render() {
         return (
