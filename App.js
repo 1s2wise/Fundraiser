@@ -6,10 +6,9 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 
 import Home from './pages/home';
-import EditableUserProfile from './pages/userland';
+import UpdateUserData from './pages/updateprofile';
 import UserProfile from './pages/profile';
 
-impor
 
 export default class App extends Component {
     render() {
@@ -38,7 +37,7 @@ export default class App extends Component {
 
                         <Route
                             path="/userUpdate"
-                            component={EditableUserProfile}
+                            component={UpdateUserData}
                             state
                         />
 

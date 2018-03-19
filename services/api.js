@@ -26,9 +26,11 @@ export function loginAPI(body) {
     return axios.post(BASE_URL + url, body);
 }
 
-export function getUserData(body,uid)
+export function getUserData(uid)
 {
-    
+    var url = 'fundraisers/'+uid
+    return axios.get(BASE_URL + url);
+
 }
 
 export function userUpdateAPI(body, uid) {

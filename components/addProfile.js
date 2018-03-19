@@ -48,48 +48,27 @@ function DateToSend(date) {
 }
 
 export default class EditableUserProfile extends Component {
+
     componentWillMount() {
-        this.state.phone = this.props.currentUser.user_data.phone;
-        this.state.fundraiser_type = this.props.currentUser.user_data.fundraiser_type;
-        this.state.organization_name = this.props.currentUser.user_data.organization_name;
-        this.state.email = this.props.currentUser.user_data.email;
-        this.state.first_name = this.props.currentUser.user_data.first_name;
-        this.state.last_name = this.props.currentUser.user_data.last_name;
+        this.state.phone = this.props.currentUser.userData.phone;
+        this.state.fundraiser_type = this.props.currentUser.userData.fundraiser_type;
+        this.state.organization_name = this.props.currentUser.userData.organization_name;
+        this.state.email = this.props.currentUser.userData.email;
+        this.state.first_name = this.props.currentUser.userData.first_name;
+        this.state.last_name = this.props.currentUser.userData.last_name;
 
-        this.state.dob = DateToShow(this.props.currentUser.user_data.dob);
-        this.state.street = this.props.currentUser.user_data.street;
-        this.state.city = this.props.currentUser.user_data.city;
-        this.state.state = this.props.currentUser.user_data.state;
-        this.state.country_code = this.props.currentUser.user_data.country_code;
-        this.state.zip = this.props.currentUser.user_data.zip;
+        this.state.dob = DateToShow(this.props.currentUser.userData.dob);
+        this.state.street = this.props.currentUser.userData.street;
+        this.state.city = this.props.currentUser.userData.city;
+        this.state.state = this.props.currentUser.userData.state;
+        this.state.country_code = this.props.currentUser.userData.country_code;
+        this.state.zip = this.props.currentUser.userData.zip;
 
-        this.state.fundraiser_logo_url = this.props.currentUser.user_data.fundraiser_logo_url;
-        this.state.profile_image_url = this.props.currentUser.user_data.profile_image_url;
+        this.state.fundraiser_logo_url = this.props.currentUser.userData.fundraiser_logo_url;
+        this.state.profile_image_url = this.props.currentUser.userData.profile_image_url;
 
         console.log('makedate', this.state.dob);
     }
-
-    componentWillUpdate() {
-        this.state.phone = this.props.currentUser.user_data.phone;
-        this.state.fundraiser_type = this.props.currentUser.user_data.fundraiser_type;
-        this.state.organization_name = this.props.currentUser.user_data.organization_name;
-        this.state.email = this.props.currentUser.user_data.email;
-        this.state.first_name = this.props.currentUser.user_data.first_name;
-        this.state.last_name = this.props.currentUser.user_data.last_name;
-
-        this.state.dob = DateToShow(this.props.currentUser.user_data.dob);
-        this.state.street = this.props.currentUser.user_data.street;
-        this.state.city = this.props.currentUser.user_data.city;
-        this.state.state = this.props.currentUser.user_data.state;
-        this.state.country_code = this.props.currentUser.user_data.country_code;
-        this.state.zip = this.props.currentUser.user_data.zip;
-
-        this.state.fundraiser_logo_url = this.props.currentUser.user_data.fundraiser_logo_url;
-        this.state.profile_image_url = this.props.currentUser.user_data.profile_image_url;
-
-        console.log("will update");
-    }
-
 
     constructor(props) {
         super();
@@ -139,7 +118,7 @@ export default class EditableUserProfile extends Component {
         this.toggle = this.toggle.bind(this);
 
 
-        console.log('PartialUD', props);
+        console.log('addprofilepage', props);
 
 
 
@@ -283,7 +262,7 @@ export default class EditableUserProfile extends Component {
                             <TextField id="ip_email"
                                 disabled={true}
                                 floatingLabelText="Email"
-                                value={this.props.currentUser.user_data.email}
+                                value={this.props.currentUser.userData.email}
                                 style={textStyle} />
 
                             <TextField id="ip_phone"

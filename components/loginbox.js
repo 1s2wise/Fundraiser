@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { loginAPI } from '../services/api';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 class LoginBox extends Component {
     constructor(props) {

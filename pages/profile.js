@@ -1,10 +1,39 @@
 import React, { Component } from 'react';
 import TopNav from '../components/navigation';
-export default class UserProfile extends Component {
+import { getUserData } from '../services/api';
+import { withRouter } from 'react-router-dom';
+
+class UserProfile extends Component {
     constructor(props) {
         super();
         console.log('userland', props);
+        this.gatherUserData = this.gatherUserData.bind(this);
     }
+
+    gatherUserData()
+    {
+        var userID = window.sessionStorage.getItem("UID").toString();
+        getUserData(userID)
+        .then((response) => {
+
+            if (response.status == 200) {
+                console.log('gatherddata', response);                             
+
+
+                this.props.history.push({
+                    pathname: '/userUpdate',
+                    state: { userData: response.data}
+                })
+
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    }
+
+
     render() {
         return (
             <div>
@@ -18,6 +47,7 @@ export default class UserProfile extends Component {
                         <h4>{this.props.location.state.userData.user_data.first_name} {this.props.location.state.userData.user_data.last_name}</h4>
                         <span className="glyphicon glyphicon-envelope"></span>
                         <h4>{this.props.location.state.userData.user_data.email}</h4>
+                        <button onClick={this.gatherUserData}>Update Profile</button>
 
 
                     </div>
@@ -90,3 +120,5 @@ export default class UserProfile extends Component {
     }
 
 }
+
+export default withRouter(UserProfile);
