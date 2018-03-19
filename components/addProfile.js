@@ -4,6 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import { userUpdateAPI } from '../services/api'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import ImageUpload from '../components/imageupload';
+
 
 
 const rightstyle = {
@@ -18,7 +20,7 @@ var textStyle = {
     textAlign: 'center',
 };
 
-function dateToShow(date) {
+function DateToShow(date) {
 
     var splitDate = date.split("/");
     var month = splitDate[0] - 1;
@@ -30,7 +32,7 @@ function dateToShow(date) {
     return f_date;
 }
 
-function dateToSend(date) {
+function DateToSend(date) {
     var tempdate = date;
 
     var month = (1 + tempdate.getMonth()).toString();
@@ -54,15 +56,38 @@ export default class EditableUserProfile extends Component {
         this.state.first_name = this.props.currentUser.user_data.first_name;
         this.state.last_name = this.props.currentUser.user_data.last_name;
 
-        this.state.dob = dateToShow(this.props.currentUser.user_data.dob);
+        this.state.dob = DateToShow(this.props.currentUser.user_data.dob);
         this.state.street = this.props.currentUser.user_data.street;
         this.state.city = this.props.currentUser.user_data.city;
         this.state.state = this.props.currentUser.user_data.state;
         this.state.country_code = this.props.currentUser.user_data.country_code;
         this.state.zip = this.props.currentUser.user_data.zip;
 
-        console.log('makedate', this.state.dob);
+        this.state.fundraiser_logo_url = this.props.currentUser.user_data.fundraiser_logo_url;
+        this.state.profile_image_url = this.props.currentUser.user_data.profile_image_url;
 
+        console.log('makedate', this.state.dob);
+    }
+
+    componentWillUpdate() {
+        this.state.phone = this.props.currentUser.user_data.phone;
+        this.state.fundraiser_type = this.props.currentUser.user_data.fundraiser_type;
+        this.state.organization_name = this.props.currentUser.user_data.organization_name;
+        this.state.email = this.props.currentUser.user_data.email;
+        this.state.first_name = this.props.currentUser.user_data.first_name;
+        this.state.last_name = this.props.currentUser.user_data.last_name;
+
+        this.state.dob = DateToShow(this.props.currentUser.user_data.dob);
+        this.state.street = this.props.currentUser.user_data.street;
+        this.state.city = this.props.currentUser.user_data.city;
+        this.state.state = this.props.currentUser.user_data.state;
+        this.state.country_code = this.props.currentUser.user_data.country_code;
+        this.state.zip = this.props.currentUser.user_data.zip;
+
+        this.state.fundraiser_logo_url = this.props.currentUser.user_data.fundraiser_logo_url;
+        this.state.profile_image_url = this.props.currentUser.user_data.profile_image_url;
+
+        console.log("will update");
     }
 
 
@@ -71,7 +96,7 @@ export default class EditableUserProfile extends Component {
 
         this.state = {
             modal: false,
-            modal_owner: null,
+            modal_caller: null,
             first_name: '',
             last_name: '',
             dob: '',
@@ -94,7 +119,6 @@ export default class EditableUserProfile extends Component {
         //Basic Details
         this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
         this.handleLastNameChange = this.handleLastNameChange.bind(this);
-        this.handleProfileImgChange = this.handleProfileImgChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
 
         //Address
@@ -110,23 +134,29 @@ export default class EditableUserProfile extends Component {
         this.handleFblinkChange = this.handleFblinkChange.bind(this);
         this.handleTwitterLinkChange = this.handleTwitterLinkChange.bind(this);
         this.handleOrgChange = this.handleOrgChange.bind(this);
-        this.handleFundraiserLogoChange = this.handleFundraiserLogoChange.bind(this);
         this.handleBirthChange = this.handleBirthChange.bind(this);
         this.submitData = this.submitData.bind(this);
         this.toggle = this.toggle.bind(this);
 
-        
+
         console.log('PartialUD', props);
 
 
 
     }
 
-    toggle() {
+    toggle(e) {
         this.setState({
-          modal: !this.state.modal
+            modal: !this.state.modal
         });
-      }
+        if ((e.target).innerHTML == "Profile Image") {
+            this.state.modal_caller = "fundraiserProfile";
+        }
+        else if ((e.target).innerHTML == "Fundraiser Logo") {
+            this.state.modal_caller = "fundraiserLogo";
+        }
+        console.log(this.state.modal_caller);
+    }
 
     handleFirstNameChange(e) {
         this.setState({ first_name: e.target.value });
@@ -134,10 +164,6 @@ export default class EditableUserProfile extends Component {
 
     handleLastNameChange(e) {
         this.setState({ last_name: e.target.value });
-    }
-
-    handleProfileImgChange(e) {
-        this.setState({ profile_image_url: e.target.value });
     }
 
     handlePhoneChange(e) {
@@ -164,8 +190,8 @@ export default class EditableUserProfile extends Component {
         this.setState({ zip: e.target.value });
     }
 
-    handleFundTypeChange(e) {
-        this.setState({ fundraiser_type: e.target.value })
+    handleFundTypeChange(data) {
+        this.setState({ fundraiser_type: data })
     }
 
     handleFblinkChange(e) {
@@ -178,10 +204,6 @@ export default class EditableUserProfile extends Component {
 
     handleOrgChange(e) {
         this.setState({ organization_name: e.target.value });
-    }
-
-    handleFundraiserLogoChange(e) {
-        this.setState({ fundraiser_logo_url: e.target.value });
     }
 
     handleGoogleLinkChange(e) {
@@ -198,7 +220,14 @@ export default class EditableUserProfile extends Component {
 
     submitData() {
 
-        this.state.dob = dateToSend(this.state.dob);
+        this.state.dob = DateToSend(this.state.dob);
+        this.state.profile_image_url = window.sessionStorage.getItem("profileImg");
+        this.state.fundraiser_logo_url = window.sessionStorage.getItem("logoImg");
+
+        window.sessionStorage.removeItem("profileImg");
+        window.sessionStorage.removeItem("logoImg");
+
+
         var userID = window.sessionStorage.getItem("UID").toString();
         userUpdateAPI(this.state, userID)
             .then((response) => {
@@ -320,12 +349,9 @@ export default class EditableUserProfile extends Component {
                                 <i class="fas fa-upload"></i>
                             </RaisedButton>
 
-                            <RaisedButton variant="raised" label="Fundraiser Logo" style={rightstyle}>
+                            <RaisedButton variant="raised" label="Fundraiser Logo" style={rightstyle} onClick={this.toggle}>
                                 <i class="fas fa-upload"></i>
                             </RaisedButton>
-
-
-
 
 
                             <TextField id="ip_ftype"
@@ -364,7 +390,7 @@ export default class EditableUserProfile extends Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                     <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
                     <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <ImageUpload parentState={this.state} />
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}

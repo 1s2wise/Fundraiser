@@ -6,7 +6,10 @@ import Signup from './pages/signup';
 import Login from './pages/login';
 
 import Home from './pages/home';
-import LandingPage from './pages/userland'
+import EditableUserProfile from './pages/userland';
+import UserProfile from './pages/profile';
+
+impor
 
 export default class App extends Component {
     render() {
@@ -30,7 +33,13 @@ export default class App extends Component {
                         />
                         <Route
                             path="/userHome"
-                            component={LandingPage}
+                            component={UserProfile}
+                        />
+
+                        <Route
+                            path="/userUpdate"
+                            component={EditableUserProfile}
+                            state
                         />
 
                     </div>

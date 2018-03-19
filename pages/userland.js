@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import TopNav from '../components/navigation'
 import EditableUserProfile from '../components/addProfile';
+import UserProfile from '../pages/profile';
 
 class LandingPage extends Component {
     constructor(props) {
@@ -25,7 +26,9 @@ class LandingPage extends Component {
         return (
             <div>
                 <TopNav showEmail = {this.props.location.state.userData.user_data.email}/>
-                <EditableUserProfile currentUser = {this.props.location.state.userData} />
+
+                {/* <EditableUserProfile currentUser = {this.props.location.state.userData} /> */}
+                <UserProfile currentUser = {this.props.location.state.userData} />
 
             </div>
         )

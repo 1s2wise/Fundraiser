@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LoginBox from '../components/loginbox';
-import TopNav from '../components/navigation'
+import TopNav from '../components/navigation';
 
 export default class Login extends Component {
     render() {

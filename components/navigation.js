@@ -9,6 +9,16 @@ export default class TopNav extends Component {
     userEmail: '',
     };
     console.log('nav',props);
+
+    getDetails()
+    {
+      this.props.history.push({
+        pathname: 'userUpdate',
+        
+        state: { userData: response.data }
+
+      })
+    }
   }
   //CSS ONLY
   render() {
@@ -40,9 +50,8 @@ export default class TopNav extends Component {
             <ul class="navbar-nav ml-auto">
               <li class="nav-item" id="disp-login"><a href="/login" class="nav-link" ><i class="fas fa-sign-in-alt"></i> Login</a></li>
               <li class="nav-item" id="disp-signup"><a href="/signup" class="nav-link" ><i class="fas fa-user-plus"></i> Sign Up</a></li>
-              <li class="nav-item" ><a href="#" class="nav-link" >{this.props.showEmail}</a></li>
-              <li class="nav-item" id="disp-logout"><a href="#" class="nav-link" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-              
+              <button class="nav-item nav-link" onClick={this.getDetails.bind(this) }>Manage</button>
+              <li class="nav-item" id="disp-logout"><a href="#" class="nav-link" ><i class="fas fa-sign-out-alt"></i> Logout</a></li>             
               
 
 
