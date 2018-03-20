@@ -5,6 +5,7 @@ import DatePicker from 'material-ui/DatePicker';
 import { userUpdateAPI } from '../services/api'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import ImageUpload from '../components/imageupload';
+import { getUserData } from '../services/api';
 
 
 
@@ -47,33 +48,58 @@ function DateToSend(date) {
     return tempdate;
 }
 
+var currentState = new Object();
+currentState.user = null;
+
+
 export default class EditableUserProfile extends Component {
 
-    componentWillMount() {
-        this.state.phone = this.props.currentUser.userData.phone;
-        this.state.fundraiser_type = this.props.currentUser.userData.fundraiser_type;
-        this.state.organization_name = this.props.currentUser.userData.organization_name;
-        this.state.email = this.props.currentUser.userData.email;
-        this.state.first_name = this.props.currentUser.userData.first_name;
-        this.state.last_name = this.props.currentUser.userData.last_name;
+    componentDidMount() {
+        this.setState({ loading: true }, () => {
+            this.gatherUserData();
+        });
+    }
 
-        this.state.dob = DateToShow(this.props.currentUser.userData.dob);
-        this.state.street = this.props.currentUser.userData.street;
-        this.state.city = this.props.currentUser.userData.city;
-        this.state.state = this.props.currentUser.userData.state;
-        this.state.country_code = this.props.currentUser.userData.country_code;
-        this.state.zip = this.props.currentUser.userData.zip;
+    gatherUserData() {
+        var userID = window.sessionStorage.getItem("UID").toString();
 
-        this.state.fundraiser_logo_url = this.props.currentUser.userData.fundraiser_logo_url;
-        this.state.profile_image_url = this.props.currentUser.userData.profile_image_url;
+        getUserData(userID)
+            .then((response) => {
+                if (response.status == 200) {
+                    console.log('gatherddata', response.data);
+                    currentState.user = response.data;
+                    console.log('inpromise', currentState);
+                    this.setState({
+                        phone: currentState.user.phone,
+                        fundraiser_type: currentState.user.fundraiser_type,
+                        organization_name: currentState.user.organization_name,
+                        email: currentState.user.email,
+                        first_name: currentState.user.first_name,
+                        last_name: currentState.user.last_name,
+                        dob : DateToShow(currentState.user.dob),
+                        street : currentState.user.street,
+                        city : currentState.user.city,
+                        state : currentState.user.state,
+                        country_code : currentState.user.country_code,
+                        zip : currentState.user.zip,
+                        fundraiser_logo_url : currentState.user.fundraiser_logo_url,
+                        profile_image_url : currentState.user.profile_image_url,
+                        loading: false,
+                    });
+                    console.log(this.state);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-        console.log('makedate', this.state.dob);
+        console.log('outpromise', currentState);
     }
 
     constructor(props) {
         super();
-
         this.state = {
+            loading: false,
             modal: false,
             modal_caller: null,
             first_name: '',
@@ -116,12 +142,6 @@ export default class EditableUserProfile extends Component {
         this.handleBirthChange = this.handleBirthChange.bind(this);
         this.submitData = this.submitData.bind(this);
         this.toggle = this.toggle.bind(this);
-
-
-        console.log('addprofilepage', props);
-
-
-
     }
 
     toggle(e) {
@@ -211,24 +231,7 @@ export default class EditableUserProfile extends Component {
         userUpdateAPI(this.state, userID)
             .then((response) => {
                 if (response.status == 200) {
-                    console.log('200ok', response);
-
-                    this.state.phone = response.data.phone;
-                    this.state.fundraiser_type = response.data.fundraiser_type;
-                    this.state.organization_name = response.data.organization_name;
-                    this.state.email = response.data.email;
-                    this.state.first_name = response.data.first_name;
-                    this.state.last_name = response.data.last_name;
-
-                    this.state.dob = DateToShow(response.data.dob);
-                    this.state.street = response.data.street;
-                    this.state.city = response.data.city;
-                    this.state.state = response.data.state;
-                    this.state.country_code = response.data.country_code;
-                    this.state.zip = response.data.zip;
-
-                    this.state.fundraiser_logo_url = response.data.fundraiser_logo_url;
-                    this.state.profile_image_url = response.data.profile_image_url;
+                    console.log('GET userdata', response);
                 }
             })
 
@@ -245,6 +248,11 @@ export default class EditableUserProfile extends Component {
 
     //floatingLabelText={this.props.Email}
     render() {
+        if (this.state.loading)
+            return (
+                <h1> Loading data...</h1>
+            )
+
         return (
             <div className="container-fluid">
                 {/* <h3><span><i class="far fa-bookmark"></i></span>My Profile</h3> */}
@@ -259,17 +267,17 @@ export default class EditableUserProfile extends Component {
                             <TextField id="ip_firstname"
                                 onChange={this.handleFirstNameChange}
                                 value={this.state.first_name}
-                                floatingLabelText="Enter First Name"
+                                floatingLabelText="Enter First Name *"
                                 style={textStyle} />
 
                             <TextField id="ip_lastname"
                                 onChange={this.handleLastNameChange}
                                 value={this.state.last_name}
-                                floatingLabelText="Enter Last Name"
+                                floatingLabelText="Enter Last Name *"
                                 style={textStyle} />
 
                             <DatePicker onChange={this.handleBirthChange}
-                                floatingLabelText="Date Of Birth"
+                                floatingLabelText="Date Of Birth *"
                                 container="inline"
                                 value={this.state.dob}
                                 style={textStyle} />
@@ -279,11 +287,11 @@ export default class EditableUserProfile extends Component {
                             <TextField id="ip_email"
                                 disabled={true}
                                 floatingLabelText="Email"
-                                value={this.props.currentUser.userData.email}
+                                value={this.state.email}
                                 style={textStyle} />
 
-                            <TextField id="ip_phone"
-                                floatingLabelText="Phone"
+                            <TextField id="ip_phone "
+                                floatingLabelText="Phone *"
                                 onChange={this.handlePhoneChange}
                                 value={this.state.phone}
                                 disabled={false}
@@ -305,31 +313,31 @@ export default class EditableUserProfile extends Component {
                             <TextField id="ip_street"
                                 onChange={this.handleStreetChange}
                                 value={this.state.street}
-                                floatingLabelText="Street"
+                                floatingLabelText="Street *"
                                 style={textStyle} />
 
                             <TextField id="ip_city"
                                 onChange={this.handleCityChange}
                                 value={this.state.city}
-                                floatingLabelText="City"
+                                floatingLabelText="City *"
                                 style={textStyle} />
 
                             <TextField id="ip_state"
                                 onChange={this.handleStateChange}
                                 value={this.state.state}
-                                floatingLabelText="State"
+                                floatingLabelText="State *"
                                 style={textStyle} />
 
                             <TextField id="ip_countrycode"
                                 onChange={this.handleCountryCodeChange}
                                 value={this.state.country_code}
-                                floatingLabelText="Country Code"
+                                floatingLabelText="Country Code *"
                                 style={textStyle} />
 
                             <TextField id="ip_zip"
                                 onChange={this.handleZipChange}
                                 value={this.state.zip}
-                                floatingLabelText="Zip"
+                                floatingLabelText="Zip *"
                                 style={textStyle} />
 
                         </div>

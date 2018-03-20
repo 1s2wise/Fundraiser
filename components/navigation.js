@@ -17,7 +17,7 @@ export default class TopNav extends Component {
       <div>
         <nav class="navbar navbar-expand-md navbar-dark nav-color">
 
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/login">
           <img id="logo" src="img/fund.png"/>
           <strong>Fundox</strong></a>
 

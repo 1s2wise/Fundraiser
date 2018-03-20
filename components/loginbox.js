@@ -17,6 +17,8 @@ class LoginBox extends Component {
 
         this.logIn = this.logIn.bind(this);
 
+        window.sessionStorage.clear();
+
 
     }
 
