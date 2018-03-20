@@ -4,7 +4,7 @@ import { signupAPI } from '../services/api';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 const style = {
-    margin: '20px 60px auto',
+    margin: '18px 60px auto',
     float: 'right',
   };
 
