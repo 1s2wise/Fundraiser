@@ -26,7 +26,7 @@ class LoginBox extends Component {
             .then((response) => {
 
                 if (response.status == 200) {
-                    console.log('200ok', response);
+                    console.log('login', response);
                     window.sessionStorage.setItem("AuthKey", response.headers.auth);
                     window.sessionStorage.setItem("UID", response.data.user_data.id);
                     
