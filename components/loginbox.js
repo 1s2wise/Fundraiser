@@ -60,13 +60,15 @@ class LoginBox extends Component {
             <div className="login-container raiseup">
                 <h3>Welcome Back!</h3>
                 <h6>We're glad you're here</h6>
+                <div className="col-sm-3">
                 <form className="form-group">
                     <TextField id="ip_email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID" />
-                    <TextField id="ip_password" onChange={this.handlePasswordChange} hintText="Atleast 8 Characters" floatingLabelText="Enter Password" />
+                    <TextField id="ip_password" type="password" onChange={this.handlePasswordChange} hintText="Atleast 8 Characters" floatingLabelText="Enter Password" />
                     <div className="loginbtn">
                         <RaisedButton label="Log In" type="button" primary={true} onClick={this.logIn} />
                     </div>
                 </form>
+                </div>
 
             </div>
 
