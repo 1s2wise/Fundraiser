@@ -20,6 +20,7 @@ class LandingPage extends Component {
   
         scriptHide.appendChild(scriptText);
         document.body.appendChild(scriptHide);
+        console.log('dmt');
        
     }
     render() {

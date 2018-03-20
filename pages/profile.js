@@ -4,6 +4,15 @@ import { getUserData } from '../services/api';
 import { withRouter } from 'react-router-dom';
 
 class UserProfile extends Component {
+    componentDidMount () {
+        const scriptHide = document.createElement("script");
+  
+        const scriptText = document.createTextNode('document.getElementById("disp-signup").style.display = "none"; document.getElementById("disp-login").style.display = "none"; document.getElementById("disp-logout").style.display = "initial";');
+  
+        scriptHide.appendChild(scriptText);
+        document.body.appendChild(scriptHide);       
+    }
+
     constructor(props) {
         super();
         console.log('userland', props);
@@ -41,20 +50,22 @@ class UserProfile extends Component {
             <div className="row">
                 <div className="col-lg-4">
                     <div id="portrait">
-                        <img className="img-responsive" src="" />
+                        <img className="img-responsive" src={this.props.location.state.userData.user_data.profile_image_url} />
                     </div>
                     <div id="databox">
                         <h4>{this.props.location.state.userData.user_data.first_name} {this.props.location.state.userData.user_data.last_name}</h4>
                         <span className="glyphicon glyphicon-envelope"></span>
                         <h4>{this.props.location.state.userData.user_data.email}</h4>
-                        <button onClick={this.gatherUserData}>Update Profile</button>
+                        <button className="btn btn-success" onClick={this.gatherUserData}>Update Profile</button>
 
 
                     </div>
                 </div>
                 <div className="col-lg-8">
-                    <div className="row">
-                    <h3>BASIC</h3>
+                    <div className="row topmargin">
+                    <div className="col-sm-2">
+                    <h4>BASIC</h4>
+                    </div>
                         <div className="col-sm-4">
                             <p>ID</p>
                             <p>First Name</p>
@@ -77,7 +88,9 @@ class UserProfile extends Component {
                 
 
                 <div className="row">
-                <h3>ADDRESS</h3>
+                <div className="col-sm-2">
+                <h4>ADDRESS</h4>
+                </div>
                     <div className="col-sm-4">
                         <p>Location</p>
                         <p>Street</p>
@@ -103,9 +116,11 @@ class UserProfile extends Component {
                 </div>
 
                 <div className="row">
-                <h3>SOCIAL</h3>
+                <div className="col-sm-2">
+                <h4>SOCIAL</h4>
+                </div>
                     <img src="" />
-                    <h4>Fundraiser Logo</h4>
+                    <hp>Fundraiser Logo</hp>
                     <div className="row-sm-4">
                         <a href={this.props.location.state.userData.user_data.facebook_link}>Facebook</a>
                         <a href={this.props.location.state.userData.user_data.google_link}>Google</a>

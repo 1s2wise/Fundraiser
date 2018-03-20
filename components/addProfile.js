@@ -212,6 +212,23 @@ export default class EditableUserProfile extends Component {
             .then((response) => {
                 if (response.status == 200) {
                     console.log('200ok', response);
+
+                    this.state.phone = response.data.phone;
+                    this.state.fundraiser_type = response.data.fundraiser_type;
+                    this.state.organization_name = response.data.organization_name;
+                    this.state.email = response.data.email;
+                    this.state.first_name = response.data.first_name;
+                    this.state.last_name = response.data.last_name;
+
+                    this.state.dob = DateToShow(response.data.dob);
+                    this.state.street = response.data.street;
+                    this.state.city = response.data.city;
+                    this.state.state = response.data.state;
+                    this.state.country_code = response.data.country_code;
+                    this.state.zip = response.data.zip;
+
+                    this.state.fundraiser_logo_url = response.data.fundraiser_logo_url;
+                    this.state.profile_image_url = response.data.profile_image_url;
                 }
             })
 
@@ -372,8 +389,7 @@ export default class EditableUserProfile extends Component {
                         <ImageUpload parentState={this.state} />
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        <Button color="primary" onClick={this.toggle}>Done</Button>
                     </ModalFooter>
                 </Modal>
 
