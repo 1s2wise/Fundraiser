@@ -3,20 +3,91 @@ import TopNav from '../components/navigation';
 import { getUserData } from '../services/api';
 import { withRouter } from 'react-router-dom';
 
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
+const style = {
+    container: {
+        position: 'relative',
+    },
+    refresh: {
+        display: 'inline-block',
+        position: 'relative',
+    },
+};
+
+var currentState = new Object();
+currentState.user = null;
+
 class UserProfile extends Component {
     componentDidMount() {
-        const scriptHide = document.createElement("script");
 
-        const scriptText = document.createTextNode('document.getElementById("disp-signup").style.display = "none"; document.getElementById("disp-login").style.display = "none"; document.getElementById("disp-logout").style.display = "initial";');
+        this.setState({ loading: true }, () => {
+            this.gatherUserData();
+        });
 
-        scriptHide.appendChild(scriptText);
-        document.body.appendChild(scriptHide);
     }
 
     constructor(props) {
         super();
-        console.log('userland', props);
+        this.state = {
+            loading: false,
+            phone: '',
+            fundraiser_type: '',
+            organization_name: '',
+            email: '',
+            first_name: '',
+            last_name: '',
+            dob: '',
+            street: '',
+            city: '',
+            state: '',
+            country_code: '',
+            zip: '',
+            fundraiser_logo_url: '',
+            profile_image_url: ''
+        };
         this.goToUpdate = this.goToUpdate.bind(this);
+    }
+
+    gatherUserData() {
+        var userID = window.sessionStorage.getItem("UID").toString();
+
+        getUserData(userID)
+            .then((response) => {
+                if (response.status == 200) {
+                    console.log('gatherddata', response.data);
+                    currentState.user = response.data;
+                    console.log('inpromise', currentState);
+                    this.setState({
+                        phone: currentState.user.phone,
+                        fundraiser_type: currentState.user.fundraiser_type,
+                        organization_name: currentState.user.organization_name,
+                        email: currentState.user.email,
+                        first_name: currentState.user.first_name,
+                        last_name: currentState.user.last_name,
+                        dob: currentState.user.dob,
+                        street: currentState.user.street,
+                        city: currentState.user.city,
+                        state: currentState.user.state,
+                        country_code: currentState.user.country_code,
+                        zip: currentState.user.zip,
+                        fundraiser_logo_url: currentState.user.fundraiser_logo_url,
+                        profile_image_url: currentState.user.profile_image_url,
+                        loading: false,
+                    });
+                    console.log(this.state);
+                    const scriptHide = document.createElement("script");
+
+                    const scriptText = document.createTextNode('document.getElementById("disp-signup").style.display = "none"; document.getElementById("disp-login").style.display = "none"; document.getElementById("disp-logout").style.display = "initial";');
+
+                    scriptHide.appendChild(scriptText);
+                    document.body.appendChild(scriptHide);
+
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     goToUpdate() {
@@ -27,30 +98,44 @@ class UserProfile extends Component {
 
 
     render() {
+        if (this.state.loading)
+            return (
+                <div style={style.container}>
+                    <RefreshIndicator
+                        size={80}
+                        left={screen.availWidth / 2}
+                        top={0}
+                        status="loading"
+                        style={style.refresh}
+                    />
+                </div>
+            )
         return (
+
             <div>
+
                 <TopNav />
                 <div className="row">
                     <div className="col-lg-4">
                         <div id="portrait">
-                            <img className="img-responsive" src={this.props.location.state.userData.user_data.profile_image_url} />
+                            <img className="img-responsive" src={this.state.profile_image_url} />
                         </div>
                         <div id="databox">
-                            <h4>{this.props.location.state.userData.user_data.first_name} {this.props.location.state.userData.user_data.last_name}</h4>
+                            <h4>{this.state.first_name} {this.state.last_name}</h4>
                             <span className="glyphicon glyphicon-envelope"></span>
-                            <h4>{this.props.location.state.userData.user_data.email}</h4>
+                            <h4>{this.state.email}</h4>
                             <button className="btn btn-success" onClick={this.goToUpdate}>Update Profile</button>
                         </div>
                         <div className="mgLeft">
                             <div class="fund">
                                 <p className="showFundName">Fundraiser Logo</p>
-                                <img className="fundLogo" src={this.props.location.state.userData.user_data.fundraiser_logo_url} />
+                                <img className="fundLogo" src={this.state.fundraiser_logo_url} />
 
                             </div>
                             <div className="row-sim">
-                                <a className="socialLink" href={this.props.location.state.userData.user_data.facebook_link}><i class="fab fa-facebook-f"></i></a>
-                                <a className="socialLink" href={this.props.location.state.userData.user_data.google_link}><i class="fab fa-google-plus-g"></i></a>
-                                <a className="socialLink" href={this.props.location.state.userData.user_data.twitter_link}><i class="fab fa-twitter"></i></a>
+                                <a className="socialLink" href={this.state.facebook_link}><i class="fab fa-facebook-f"></i></a>
+                                <a className="socialLink" href={this.state.google_link}><i class="fab fa-google-plus-g"></i></a>
+                                <a className="socialLink" href={this.state.twitter_link}><i class="fab fa-twitter"></i></a>
                             </div>
                         </div>
                     </div>
@@ -64,27 +149,27 @@ class UserProfile extends Component {
                                     <tbody>
                                         <tr>
                                             <td>ID</td>
-                                            <td>{this.props.location.state.userData.user_data.id}</td>
+                                            <td>{this.state.id}</td>
                                         </tr>
                                         <tr>
                                             <td>First Name</td>
-                                            <td>{this.props.location.state.userData.user_data.first_name}</td>
+                                            <td>{this.state.first_name}</td>
                                         </tr>
                                         <tr>
                                             <td>Last Name</td>
-                                            <td>{this.props.location.state.userData.user_data.last_name}</td>
+                                            <td>{this.state.last_name}</td>
                                         </tr>
                                         <tr>
                                             <td>Date of Birth</td>
-                                            <td>{this.props.location.state.userData.user_data.dob}</td>
+                                            <td>{this.state.dob}</td>
                                         </tr>
                                         <tr>
                                             <td>Phone</td>
-                                            <td>{this.props.location.state.userData.user_data.phone}</td>
+                                            <td>{this.state.phone}</td>
                                         </tr>
                                         <tr>
                                             <td>Fundraiser Type</td>
-                                            <td>{this.props.location.state.userData.user_data.fundraiser_type}</td>
+                                            <td>{this.state.fundraiser_type}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -99,23 +184,23 @@ class UserProfile extends Component {
                                         <tbody>
                                             <tr>
                                                 <td>Street</td>
-                                                <td>{this.props.location.state.userData.user_data.street}</td>
+                                                <td>{this.state.street}</td>
                                             </tr>
                                             <tr>
                                                 <td>City</td>
-                                                <td>{this.props.location.state.userData.user_data.city}</td>
+                                                <td>{this.state.city}</td>
                                             </tr>
                                             <tr>
                                                 <td>State</td>
-                                                <td>{this.props.location.state.userData.user_data.state}</td>
+                                                <td>{this.state.state}</td>
                                             </tr>
                                             <tr>
                                                 <td>Country Code</td>
-                                                <td>{this.props.location.state.userData.user_data.country_code}</td>
+                                                <td>{this.state.country_code}</td>
                                             </tr>
                                             <tr>
                                                 <td>Zip</td>
-                                                <td>{this.props.location.state.userData.user_data.zip}</td>
+                                                <td>{this.state.zip}</td>
                                             </tr>
                                         </tbody>
                                     </table>

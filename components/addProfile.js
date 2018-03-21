@@ -250,6 +250,7 @@ export default class EditableUserProfile extends Component {
             .then((response) => {
                 if (response.status == 200) {
                     console.log('GET userdata', response);
+                    alert("Profile Updated!");
                 }
             })
 

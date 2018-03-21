@@ -86,7 +86,7 @@ export default class SignupBox extends Component {
             <div className="login-container raiseup">
             <h3>Let's Start</h3>
                     <form className="form-group">
-                        <TextField  id="ip_email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID *" style={textStyle}/>
+                        <TextField  id="ip_email" type="email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID *" style={textStyle}/>
                         <TextField  id="ip_password" onChange={this.handlePasswordChange} hintText="Atleast 8 Characters" floatingLabelText="Enter Password *" style={textStyle} />
                         <TextField  id="ip_cfPassword" onChange={this.handleCfPasswordChange} hintText="Confirm Password" floatingLabelText="Re-Type Password *" style={textStyle} />
                         <TextField  id="ip_ftype" onChange={this.handleFtypeChange} hintText="Fundraiser Type" floatingLabelText="Fundraiser Type *" style={textStyle} />

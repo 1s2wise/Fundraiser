@@ -26,9 +26,8 @@ export function loginAPI(body) {
     return axios.post(BASE_URL + url, body);
 }
 
-export function getUserData(uid)
-{
-    var url = 'fundraisers/'+uid
+export function getUserData(uid) {
+    var url = 'fundraisers/' + uid
     return axios.get(BASE_URL + url);
 
 }
@@ -49,13 +48,19 @@ export function imageUpload(imgFile, imgType, userID) {
     data.append('user_id', userID);
 
     axios.post(BASE_URL + url, data).then((response) => {
-
-        if (imgType == "fundraiserProfile") {
-            window.sessionStorage.setItem("profileImg", response.data.image_url);
+        console.log('img', response)
+        if (response.status == 200) {
+            if (imgType == "fundraiserProfile") {
+                window.sessionStorage.setItem("profileImg", response.data.image_url);
+            }
+            else if (imgType == "fundraiserLogo") {
+                window.sessionStorage.setItem("logoImg", response.data.image_url);
+            }
+            alert("Success");
         }
-        else if (imgType == "fundraiserLogo") {
-            window.sessionStorage.setItem("logoImg", response.data.image_url);
-        }
+    })
+    .catch(function (error) {
+        console.log(error);
     });
 
 }
