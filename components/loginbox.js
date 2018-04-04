@@ -4,6 +4,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { loginAPI } from '../services/api';
 import { withRouter } from 'react-router-dom';
 
+var textStyle = {
+    width: '80%',
+    display: 'block',
+};
+
 var btnlogin = {float:'right'};
 
 class LoginBox extends Component {
@@ -45,6 +50,7 @@ class LoginBox extends Component {
             })
             .catch(function (error) {
                 console.log(error);
+                alert("Incorrect Username/Password");
             });
     }
 
@@ -65,8 +71,8 @@ class LoginBox extends Component {
                 <h3>Welcome Back!</h3>
                 <h6>We're glad you're here</h6>
                 <form className="form-group">
-                    <TextField id="ip_email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID" />
-                    <TextField id="ip_password" type="password" onChange={this.handlePasswordChange} hintText="Atleast 8 Characters" floatingLabelText="Enter Password" />
+                    <TextField id="ip_email" onChange={this.handleEmailChange} hintText="abc@xyz.com" floatingLabelText="Enter Email ID" style={textStyle} />
+                    <TextField id="ip_password" type="password" onChange={this.handlePasswordChange} hintText="Atleast 8 Characters" floatingLabelText="Enter Password" style={textStyle}/>
                     <div className="loginbtn">
                         <RaisedButton label="Log In" type="button" primary={true} style={btnlogin} onClick={this.logIn} />
                     </div>

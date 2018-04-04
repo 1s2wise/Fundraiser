@@ -13,8 +13,8 @@ export default class Login extends Component {
                             <LoginBox />
                         </div>
                         <div className="container col-sm-8 table-responsive">
-                            <div>
-                                <img src="img/fundTree.jpg" />
+                            <div className="container-fluid">
+                                <img className="login-image-container" src="img/fundTree.jpg" />
                             </div>
                         </div>
                     </div>
