@@ -2,9 +2,11 @@
   "name": "sample_project",
   "version": "1.0.0",
   "description": "Sample API Calls",
+  "homepage": "http://35.154.188.19",
   "main": "main.js",
   "scripts": {
     "start": "webpack-dev-server --hot",
+    "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Thomson",

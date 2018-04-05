@@ -7,7 +7,7 @@ var config = {
 	devServer: {
 		  inline: true, // autorefresh
 		  historyApiFallback: true,
-		  port: 9099 // development port server
+		  port: 8080, // development port server
 	   },
 	module: {
 		  rules: [
